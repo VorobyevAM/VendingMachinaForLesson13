@@ -1,15 +1,21 @@
 package vm_les13;
 
+import org.apache.log4j.Logger;
 import vm_les13.drinks.ColdDrinkType;
 import vm_les13.drinks.interfaceDrink.DrinkType;
 import vm_les13.drinks.HotDrinkType;
 import vm_les13.drinks.Product;
 import vm_les13.exception.MyException;
 
+
+
 /**
  * Торговый автомат
  */
 public class VendingMachine {
+
+    private static final Logger LOG = Logger.getLogger(VendingMachine.class.getName());
+
     private double money = 0;
     private Product[] drinks = new Product[]{
             new Product(ColdDrinkType.COCA, 10),
@@ -36,6 +42,7 @@ public class VendingMachine {
         }
 
         this.money += money;
+        LOG.info("ADD MONEY IN THE VENDING MACHINA = " + money);
         return this.money;
     }
 
@@ -50,9 +57,10 @@ public class VendingMachine {
      */
     public DrinkType giveMeADrink(int key) throws MyException {
         if (!isKeyValid(key)) {
-
+            LOG.info("CLIENT CHOOSE DRINK NUMBER " + key);
             if (true){
                 throw new ArrayIndexOutOfBoundsException("Такого товара нет!");
+
             }
             // Неправильный код товара - товар не возвращается
             return null;
